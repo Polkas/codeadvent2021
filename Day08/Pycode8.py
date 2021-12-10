@@ -1,4 +1,4 @@
-raw8 = open("Day8/input8").readlines()
+raw8 = open("Day08/input8").readlines()
 inputs = list(r.split("|")[0].strip().split(" ") for r in raw8)
 output = list(r.split("|")[1].strip().split(" ") for r in raw8)
 
@@ -47,4 +47,4 @@ for ii, o in enumerate(output):
     for e in o:
         res2[ii] = res2[ii] + res[ii][tuple(sorted(list(set(e))))]
         
-sum([int(i) for i in res2])
+print(sum([int(i) for i in res2]))

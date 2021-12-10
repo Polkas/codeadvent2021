@@ -12,7 +12,6 @@ for (idx in seq_along(start)) {
 }
 
 boards2 <- boards
-
 wins <- NULL
 for (num in d4_s) {
   for (idx in seq_along(boards2)) {
@@ -38,7 +37,6 @@ for (num in d4_s) {
 wins
 
 boards2 <- boards
-
 wins <- NULL
 boards_taken <- seq_along(boards2)
 for (num in d4_s) {

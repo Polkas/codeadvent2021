@@ -40,26 +40,27 @@ tt <- table(d6_f)
 for (i in names(tt)) bb[i] <- tt[i]
 
 options(scipen = 999)
-
 # 2
 res <- fish_repro_improved(bb, stop = 256)
 sum(res)
 
 # 2 Markov
+fish_repro_markov <- function(start_vec, ndays = 256) {
+  stopifnot(length(start_vec) == 9)
+  trans_mat <- matrix(c(c(0,0,0,0,0,0,1,0,1),
+                        c(1,0,0,0,0,0,0,0,0),
+                        c(0,1,0,0,0,0,0,0,0),
+                        c(0,0,1,0,0,0,0,0,0),
+                        c(0,0,0,1,0,0,0,0,0),
+                        c(0,0,0,0,1,0,0,0,0),
+                        c(0,0,0,0,0,1,0,0,0),
+                        c(0,0,0,0,0,0,1,0,0),
+                        c(0,0,0,0,0,0,0,1,0)), 9, byrow = T)
+  #bb
+  #bb %*% trans_mat
+  #bb %*% trans_mat %*% trans_mat
+  #bb %*% trans_mat %*% trans_mat %*% trans_mat
+  sum(Reduce(`%*%`,lapply(seq_len(ndays), function(x) trans_mat), init = start_vec))
+}
 
-trans_mat <- matrix(c(c(0,0,0,0,0,0,1,0,1),
-                      c(1,0,0,0,0,0,0,0,0),
-                      c(0,1,0,0,0,0,0,0,0),
-                      c(0,0,1,0,0,0,0,0,0),
-                      c(0,0,0,1,0,0,0,0,0),
-                      c(0,0,0,0,1,0,0,0,0),
-                      c(0,0,0,0,0,1,0,0,0),
-                      c(0,0,0,0,0,0,1,0,0),
-                      c(0,0,0,0,0,0,0,1,0)), 9, byrow = T)
-
-#bb
-#bb %*% trans_mat
-#bb %*% trans_mat %*% trans_mat
-#bb %*% trans_mat %*% trans_mat %*% trans_mat
-
-sum(Reduce(`%*%`,lapply(seq_len(256), function(x) trans_mat), init = bb))
+fish_repro_markov(bb, 256)

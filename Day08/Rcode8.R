@@ -10,5 +10,8 @@ d8_f <- tidyr::separate(
   )
 
 d8_m <- as.matrix(d8_f)
-
+#1
 sum(nchar(as.matrix(d8_m[, output_cols])) %in% c(2:4, 7))
+
+#2
+reticulate::py_run_file("Day08/Pycode8.py")
