@@ -44,3 +44,22 @@ options(scipen = 999)
 # 2
 res <- fish_repro_improved(bb, stop = 256)
 sum(res)
+
+# 2 Markov
+
+trans_mat <- matrix(c(c(0,0,0,0,0,0,1,0,1),
+                      c(1,0,0,0,0,0,0,0,0),
+                      c(0,1,0,0,0,0,0,0,0),
+                      c(0,0,1,0,0,0,0,0,0),
+                      c(0,0,0,1,0,0,0,0,0),
+                      c(0,0,0,0,1,0,0,0,0),
+                      c(0,0,0,0,0,1,0,0,0),
+                      c(0,0,0,0,0,0,1,0,0),
+                      c(0,0,0,0,0,0,0,1,0)), 9, byrow = T)
+
+#bb
+#bb %*% trans_mat
+#bb %*% trans_mat %*% trans_mat
+#bb %*% trans_mat %*% trans_mat %*% trans_mat
+
+sum(Reduce(`%*%`,lapply(seq_len(256), function(x) trans_mat), init = bb))
