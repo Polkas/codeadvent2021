@@ -2,7 +2,7 @@ library(dplyr)
 library(tidyr)
 library(collections)
 
-d5 <- readLines("Day5/input5")
+d5 <- readLines("Day05/input5")
 
 d5_df <- tidyr::separate(data.frame(d5), "d5", into = c("x1", "y1", "x2", "y2")) %>%
   mutate_all(as.numeric)

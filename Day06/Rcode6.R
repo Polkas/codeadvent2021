@@ -1,4 +1,4 @@
-d6 <- readLines("Day6/input6")
+d6 <- readLines("Day06/input6")
 d6_f <- as.numeric(strsplit(d6, ",")[[1]])
 
 fish_repro <- function(vec, res = NULL, iter = 1, stop = 80) {

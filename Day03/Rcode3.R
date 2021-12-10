@@ -1,4 +1,4 @@
-d3 <- readLines("Day3/input3")
+d3 <- readLines("Day03/input3")
 d3_mat <- do.call(rbind, strsplit(d3, ""))
 res <- apply(d3_mat, 2, function(x) names(sort(table(x)))[2])
 gamma = strtoi(paste0(res, collapse = ""), base = 2)

@@ -1,4 +1,4 @@
-d7 <- readLines("Day7/input7")
+d7 <- readLines("Day07/input7")
 d7_h <- as.numeric(strsplit(d7, ",")[[1]])
 
 #1

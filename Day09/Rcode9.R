@@ -1,7 +1,7 @@
 #install.packages("OpenImageR")
 #install.packages("BiocManager")
 #BiocManager::install("EBImage")
-d9 <- readLines("Day9/input9")
+d9 <- readLines("Day09/input9")
 
 d9_mat_raw <- do.call(rbind, strsplit(d9, ""))
 class(d9_mat_raw) <- "numeric"
@@ -29,6 +29,54 @@ low_points <- function(mat) {
 #1
 sum(low_points(d9_mat_raw) + 1)
 
+library(collections)
+
+floodFillPoint <- function(mat, pos, new_colr) {
+
+  nrow_max <- nrow(mat)
+  ncol_max <- ncol(mat)
+
+  get_coord <- function(x, cc) {
+    x[cc[1], cc[2]]
+  }
+
+  set_coord <- function(mat, cc, colr) {
+    mat[cc[1], cc[2]] <<- colr
+  }
+
+  up <- function(x) {
+    c(max(x[1] - 1, 1), x[2])
+  }
+
+  down <- function(x) {
+    c(min(x[1] + 1, nrow_max), x[2])
+  }
+
+  left <- function(x) {
+    c(x[1], max(x[2] - 1, 1))
+  }
+
+  right <- function(x) {
+    c(x[1], min(x[2] + 1, ncol_max))
+  }
+
+  deque <- deque()
+  start_color <- get_coord(mat, pos)
+  deque$push(pos)
+
+  while (isTRUE(deque$size() > 0)) {
+    new_c <- deque$pop()
+    if (isTRUE(get_coord(mat, new_c) == start_color)) {
+      set_coord(mat, new_c, new_colr)
+      deque$push(left(new_c))
+      deque$push(right(new_c))
+      deque$push(up(new_c))
+      deque$push(down(new_c))
+    }
+  }
+  mat
+}
+
 flood_n_pergroup <- function(mat) {
   stopifnot(is.matrix(mat))
   stopifnot(all(mat %in% c(0,1)))
@@ -42,7 +90,7 @@ flood_n_pergroup <- function(mat) {
     if (r == 0) {
       r <- n_row
     }
-    mat <- EBImage::floodFill(mat, c(r, col), 0.5)
+    mat <- floodFillPoint(mat, c(r, col), 0.5)
     maxs <- c(maxs, sum(mat == 0.5))
     mat[mat == 0.5] <- 1
   }
@@ -55,3 +103,4 @@ d9_mat_2[d9_mat_2 == 9] <- 1
 maxs <- flood_n_pergroup(d9_mat_2)
 #2
 prod(sort(maxs, decreasing = TRUE)[1:3])
+# 1148965

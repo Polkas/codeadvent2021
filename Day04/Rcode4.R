@@ -1,4 +1,4 @@
-d4 <- readLines("Day4/input4")
+d4 <- readLines("Day04/input4")
 d4_s <- strsplit(d4[1], ",")[[1]]
 d4_b <- d4[3:length(d4)]
 

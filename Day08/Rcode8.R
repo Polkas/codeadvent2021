@@ -1,4 +1,4 @@
-d8 <- readLines("Day8/input8")
+d8 <- readLines("Day08/input8")
 library(dplyr)
 output_cols <- paste0("output_", 1:4)
 input_cols <- paste0("input_", 1:10)

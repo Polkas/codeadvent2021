@@ -1,4 +1,4 @@
-d2 <- readLines("Day2/input2")
+d2 <- readLines("Day02/input2")
 d2d <- vapply(strsplit(d2, " "), function(x) x[1], character(1))
 d2n <- as.numeric(vapply(strsplit(d2, " "), function(x) x[2], character(1)))
 
