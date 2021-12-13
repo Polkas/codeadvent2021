@@ -1,15 +1,15 @@
-d11 <- readLines("Day12/input12")
+d12 <- readLines("Day12/input12")
 
 library(igraph)
 library(collections)
 
-d11_df <- do.call(rbind, strsplit(d11, "-"))
-# gg <- graph_from_edgelist(d11_df, directed <- FALSE)
-# igraph::plot.igraph(gg)
+d12_df <- do.call(rbind, strsplit(d12, "-"))
+#gg <- graph_from_edgelist(d11_df, directed <- FALSE)
+#igraph::plot.igraph(gg)
 
-d11_1 <- tapply(d11_df[, 2], d11_df[, 1], list)
-d11_2 <- tapply(d11_df[, 1], d11_df[, 2], list)
-binded <- c(d11_1, d11_2)
+d12_1 <- tapply(d11_df[, 2], d12_df[, 1], list)
+d12_2 <- tapply(d11_df[, 1], d12_df[, 2], list)
+binded <- c(d12_1, d12_2)
 adjlist <- tapply(binded, names(binded), function(x) unique(unlist(x, FALSE, FALSE)))
 
 # is_lowercase <- function(x) x == tolower(x)
